@@ -73,6 +73,8 @@ function Illustration({
   return h("img", {
     tw: `w-full h-full object-cover`,
     src: imageHref,
+    width: width / 2,
+    height,
   });
 }
 
