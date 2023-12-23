@@ -71,7 +71,7 @@ function Illustration({
     : `https://${process.env.VERCEL_URL}${imageHref}`;
 
   return h("img", {
-    tw: `w-full h-full object-cover`,
+    tw: `w-full h-full`,
     src: imageHref,
     width: width / 2,
     height,
