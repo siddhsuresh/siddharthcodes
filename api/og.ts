@@ -58,7 +58,7 @@ function Illustration({
 }: {
   imageHref: string;
 }) {
-  imageHref = `https://${process.env.VERCEL_URL}${imageHref}`;
+  imageHref = `https://siddharthcodes.vercel.app/${imageHref}`;
 
   return h("img", {
     tw: `w-full h-full`,
