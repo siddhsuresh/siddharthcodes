@@ -28,7 +28,7 @@ export default async function og(req: Request) {
         children: [
           h(LeftSide, {
             children: [
-              h(Title, { title: post.title }),
+              h(Title, { title: "siddharth.codes" }),
               h(Footer, { post }),
             ],
           }),
@@ -66,9 +66,7 @@ function Illustration({
   imageHref: string;
   isExternal?: boolean;
 }) {
-  imageHref = isExternal
-    ? imageHref
-    : `https://${process.env.VERCEL_URL}${imageHref}`;
+  imageHref = `https://${process.env.VERCEL_URL}${imageHref}`;
 
   return h("img", {
     tw: `w-full h-full`,
@@ -105,7 +103,7 @@ function Footer({ post }: {post: Post }) {
         text-4xl font-black text-left
         `,
       },
-      "Open-Source Journey",
+      post.title
     ),
     h(
       "p",
