@@ -8,20 +8,13 @@ import { ImageResponse } from "@vercel/og";
 import type * as React from "react";
 
 const author = {
-  name: "Yours Truly",
-  avatarSrc: "https://i.pravatar.cc/256?u=30",
+  name: "siddharth.codes",
+  avatarSrc: "https://avatars.githubusercontent.com/u/83594610?v=4",
 };
 
 type Author = typeof author;
 
 export const config = { runtime: "edge" };
-
-const interRegular = fetchFont(
-  new URL("../assets/og/Inter-Regular.ttf", import.meta.url)
-);
-const interBlack = fetchFont(
-  new URL("../assets/og/Inter-Black.ttf", import.meta.url)
-);
 
 const width = 1200;
 const height = 630;
@@ -30,7 +23,7 @@ export default async function og(req: Request) {
   try {
     const url = new URL(req.url);
     const { post, stringifiedPost, token } = parseSearchParams(
-      url.searchParams
+      url.searchParams,
     );
 
     await assertTokenIsValid(stringifiedPost, token);
@@ -38,40 +31,23 @@ export default async function og(req: Request) {
     console.log("returning ImageResponse for", stringifiedPost);
 
     return new ImageResponse(
-      h(
-        "div",
-        {
-          tw: `
-            w-full h-full
-            font-Inter
-            flex flex-col
-          `,
-        },
-        h(
-          Illustration,
-          { imageHref: post.img },
-          post.img ? null : h(Title, { title: post.title })
-        ),
-        h(Footer, { author, post })
-      ),
+      h(OgContainer, {
+        children: [
+          h(LeftSide, {
+            children: [
+              h(Title, { title: post.title }),
+              h(Footer, { author, post }),
+            ],
+          }),
+          h(RightSide, {
+            children: [h(Illustration, { imageHref: post.img })],
+          }),
+        ],
+      }),
       {
         width,
         height,
-        fonts: [
-          {
-            name: "Inter",
-            data: await interRegular,
-            weight: 400,
-            style: "normal",
-          },
-          {
-            name: "Inter",
-            data: await interBlack,
-            weight: 900,
-            style: "normal",
-          },
-        ],
-      }
+      },
     );
   } catch (err: unknown) {
     console.error(err);
@@ -91,74 +67,61 @@ export default async function og(req: Request) {
 }
 
 function Illustration({
-  children,
   imageHref,
+  isExternal,
 }: {
-  children?: React.ReactNode[];
-  imageHref: string | null | undefined;
+  imageHref: string;
+  isExternal?: boolean;
 }) {
-  imageHref = imageHref ? `https://${process.env.VERCEL_URL}${imageHref}` : "";
+  imageHref = isExternal
+    ? imageHref
+    : `https://${process.env.VERCEL_URL}${imageHref}`;
 
-  return h(
-    "div",
-    {
-      tw: `
-          flex flex-1 justify-start items-end w-full pt-4 px-4 relative
-          bg-[rgb(23,23,23)]
-        `,
-    },
-    !!imageHref &&
-      h("img", {
-        tw: `absolute inset-0 object-cover`,
-        src: imageHref,
-        width,
-        height: height - 112,
-      }),
-    ...(children || [])
-  );
+  return h("img", {
+    tw: `w-full h-full object-cover`,
+    src: imageHref,
+  });
 }
 
 function Title({ title }: { title: string }) {
   return h(
-    "h1",
+    "p",
     {
       tw: `
-        text-white text-9xl font-black z-10
+      text-2xl font-bold mb-0
       `,
     },
-    title
+    title,
   );
 }
 
 function Footer({ author, post }: { author: Author; post: Post }) {
   return h(
-    "footer",
+    "div",
     {
       tw: `
-      h-28 w-full px-4 py-2.5
-      bg-white
-      text-4xl
-      flex flex-row justify-center items-center
+      flex flex-col
     `,
     },
-    h("img", {
-      width: 92,
-      height: 92,
-      src: author.avatarSrc,
-      tw: `rounded-full`,
-    }),
-    h("span", { tw: `ml-4` }, author.name),
-    h("div", { tw: `flex-1` }),
     h(
-      "span",
-      {},
-      [
-        post.date.toLocaleDateString("sv-SE"),
-        post.readingTimeMinutes > 1 && `${post.readingTimeMinutes} min`,
-      ]
-        .filter(Boolean)
-        .join(" · ")
-    )
+      "h1",
+      {
+        tw: `
+        text-4xl font-black text-left
+        `,
+      },
+      "Open-Source Journey",
+    ),
+    h(
+      "p",
+      {
+        tw: `
+        text-2xl font-bold text-left
+        `,
+      },
+      `${post.readingTimeMinutes} min`,
+    ),
+    h("p", {}, `Published on ${post.date.toLocaleDateString("sv-SE")}`),
   );
 }
 
@@ -177,15 +140,11 @@ function h<T extends React.ElementType<any>>(
   };
 }
 
-function fetchFont(url: URL) {
-  return fetch(url).then((res) => res.arrayBuffer());
-}
-
 type Post = {
   date: Date;
   title: string;
   readingTimeMinutes: number;
-  img: string | null | undefined;
+  img: string;
 };
 
 const SEPARATOR = "\t";
@@ -209,7 +168,7 @@ export type OgFunctionSearchParams = {
 
 function parseSearchParams(searchParams: URLSearchParams) {
   const stringifiedPost = decodeURIComponent(
-    searchParams.get("post") || ""
+    searchParams.get("post") || "",
   ) as StringifiedPost;
 
   const postArray = stringifiedPost.split(SEPARATOR);
@@ -222,7 +181,7 @@ function parseSearchParams(searchParams: URLSearchParams) {
     date: new Date(Number(postArray[0])),
     readingTimeMinutes: Math.round(Number(postArray[1])),
     title: postArray[2]!,
-    img: postArray[3],
+    img: postArray[3]!,
   };
 
   return {
@@ -233,7 +192,10 @@ function parseSearchParams(searchParams: URLSearchParams) {
 }
 
 class HttpError extends Error {
-  constructor(message: string, public readonly status: number) {
+  constructor(
+    message: string,
+    public readonly status: number,
+  ) {
     super(message);
   }
 }
@@ -243,7 +205,7 @@ class HttpError extends Error {
  */
 async function assertTokenIsValid(
   post: StringifiedPost,
-  receivedToken: string
+  receivedToken: string,
 ): Promise<void> {
   const secret = process.env.OG_IMAGE_SECRET;
 
@@ -256,22 +218,74 @@ async function assertTokenIsValid(
     new TextEncoder().encode(secret),
     { name: "HMAC", hash: { name: "SHA-256" } },
     false,
-    ["sign"]
+    ["sign"],
   );
 
   const arrayBuffer = await crypto.subtle.sign(
     "HMAC",
     key,
-    new TextEncoder().encode(post)
+    new TextEncoder().encode(post),
   );
 
   const token = Array.prototype.map
     .call(new Uint8Array(arrayBuffer), (n: number) =>
-      n.toString(16).padStart(2, "0")
+      n.toString(16).padStart(2, "0"),
     )
     .join("");
 
   if (receivedToken !== token) {
     throw new HttpError("Invalid token.", 401);
   }
+}
+
+function OgContainer({ children }: { children: React.ReactNode[] }) {
+  return h(
+    "div",
+    {
+      tw: `
+        h-full w-full flex items-start justify-start
+      `,
+    },
+    h(
+      "div",
+      {
+        tw: `
+          flex items-start justify-start h-full
+        `,
+      },
+      children,
+    ),
+  );
+}
+
+function LeftSide({ children }: { children: React.ReactNode[] }) {
+  return h(
+    "div",
+    {
+      tw: `
+        flex w-2/5 flex-col justify-between h-full pl-12 py-12 bg-gray-50
+      `,
+    },
+    h(
+      "div",
+      {
+        tw: `
+          flex flex-col justify-between h-full
+        `,
+      },
+      children,
+    ),
+  );
+}
+
+function RightSide({ children }: { children: React.ReactNode[] }) {
+  return h(
+    "div",
+    {
+      tw: `
+        flex w-3/5 h-full
+      `,
+    },
+    children,
+  );
 }
