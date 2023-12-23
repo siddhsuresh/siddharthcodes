@@ -118,7 +118,7 @@ export function CommandCenter(props: CommandCenterProps) {
         const commands = getOptions();
         const current = dialog.querySelector(
           '[aria-selected="true"]'
-        ) as HTMLElement;
+        )!;
 
         if (!current) {
           const next = move === 1 ? commands[0] : commands.at(-1);
@@ -355,9 +355,9 @@ export function CommandList(
             break;
           }
 
-          const first = child.querySelector("[role=option]") as HTMLElement;
+          const first = child.querySelector("[role=option]")!;
           if (first) {
-            selectOption(first);
+            selectOption(first as HTMLElement);
             break;
           }
         }

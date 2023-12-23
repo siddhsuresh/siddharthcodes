@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Link } from "../lib/Link";
-import type { PostFrontmatter } from "../types";
 import { Paragraph } from "../lib/prose/Paragraph";
+import type { PostFrontmatter } from "../types";
 
 let posts = await Astro.glob<PostFrontmatter>("../../posts/**/*.mdx");
 
@@ -45,7 +45,7 @@ posts.sort((a, b) => {
       href="/projects"
       class="absolute flex w-full flex-col bottom-[18%] left-1/2 xl:text-2xl text-lg text-center text-white font-bold -translate-x-1/2 translate-y-1/2"
     >
-      View My Projects ->
+      View My Projects -&gt;
     </a>
   </div>
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import gsap from "gsap";
 //@ts-expect-error - no types
 import * as THREE from "three";
@@ -162,8 +163,8 @@ class Sea {
       const v = verts[i];
       const vprops = this.waves[i];
 
-      v.x = vprops.x + Math.cos(vprops.ang) * vprops.amp;
-      v.y = vprops.y + Math.sin(vprops.ang) * vprops.amp;
+      v.x = vprops.x + Math.cos(Number(vprops.ang)) * vprops.amp;
+      v.y = vprops.y + Math.sin(Number(vprops.ang)) * vprops.amp;
 
       vprops.ang += vprops.speed;
     }
@@ -264,7 +265,7 @@ function loop() {
 
 const previousIntersect: string | any[] = [];
 
-const tooltip = document.getElementById("tooltip") as HTMLElement;
+const tooltip = document.getElementById("tooltip")!;
 
 window.addEventListener("mousemove", (e) => {
   document.body.style.cursor = "default";
@@ -302,7 +303,7 @@ window.addEventListener("click", (e) => {
   const intersects = raycaster.intersectObjects(scene.children, true);
   intersects.forEach((obj: any) => {
     if (obj.object.parent.userData.name === "cloud") {
-      window.open(obj.object.parent.userData.href, "_blank");
+      window.open(String(obj.object.parent.userData.href), "_blank");
     }
   });
 });
@@ -331,8 +332,8 @@ document.addEventListener(
       });
     } else {
       if (
-        isInViewport(document.getElementById("viewProjects") as HTMLElement) ||
-        isInViewport(document.getElementById("aboutMe") as HTMLElement)
+        isInViewport(document.getElementById("viewProjects")!) ||
+        isInViewport(document.getElementById("aboutMe")!)
       ) {
         gsap.to(sea.mesh.scale, {
           x: 2,
@@ -342,7 +343,7 @@ document.addEventListener(
           ease: "elastic.out(1, 0.3)",
         });
       } else if (
-        isInViewport(document.getElementById("world") as HTMLElement)
+        isInViewport(document.getElementById("world")!)
       ) {
         gsap.to(sea.mesh.scale, {
           x: 0.85,
