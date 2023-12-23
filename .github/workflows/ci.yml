@@ -70,7 +70,7 @@ jobs:
         uses: chrnorm/deployment-action@v2
         with:
           token: "${{ github.token }}"
-          environment-url: https://zaduma.vercel.app
+          environment-url: https://siddharthcodes.vercel.app
           environment: Production
           production-environment: true
           initial-status: success

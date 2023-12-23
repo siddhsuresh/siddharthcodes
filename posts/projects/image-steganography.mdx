@@ -1,0 +1,136 @@
+# CloakShare - End to End Encryption Native Application built using Tauri
+
+## Introduction
+
+<div class="repo-card" data-repo="siddhsuresh/Steganography-Encrpytion-App"></div>
+
+This project for the course Cryptography and Network Security, created an end to
+end secure file transfer application secured by RSA and AES algorithms.
+
+The app performs Image Steganography using the DCT method. Comparative analysis
+with other methods and easy to use desktop application with focus on UI/UX.
+
+## Frameworks Used
+
+- [Tauri](https://tauri.studio/en/)
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Tanstack Router](https://tanstack.com/router)
+- [OpenCV](https://opencv.org/)
+
+## Block Diagram
+
+<img
+  src="/content/projects/crypto-diagram.png"
+  alt="Block Diagram"
+  width="800"
+/>
+
+## Rust and Python Backend
+
+```rust
+//src-tauri/src/main.rs
+
+let output = std::process::Command::new("python")
+    .arg("D:\\Steganography-Encrpytion-App-main\\backend\\src\\main.py")
+    .arg("-e")
+    .arg(path)
+    .arg(output_path)
+    .arg(message)
+    .arg(pass)
+    .output()
+    .expect("failed to execute process");
+```
+
+The rust backend calls the `opencv` python script and passes the arguments to it
+by using the `std::process` library and gets the encrypted image back.
+
+## Rust (Tauri) and React (Vite)
+
+```rust
+//src-tauri/src/main.rs
+
+#[tauri::command]
+fn steganography(path: &str, message: &str, pass: &str, app: tauri::AppHandle) -> Result<(), String> {
+  ...
+  let mut file = File::open(
+      output_path_clone
+  ).unwrap();
+  let mut contents = Vec::new();
+  file.read_to_end(&mut contents).unwrap();
+  let contents = base64::encode(contents);
+  let contents = format!("data:image/png;base64,{}", contents);
+  app.emit_all("stegImage", Payload {
+      message: contents,
+  }).unwrap();
+  Ok(())
+}
+```
+
+Here we are compressing the image in base64 format and sending it to the react
+using the `tauri::AppHandle` and `app.emit_all` function.
+
+```javascript
+//src/App.jsx
+
+import { listen } from "@tauri-apps/api/event";
+
+...
+
+function App(){
+  ...
+  useEffect(() => {
+    listen("stegImage",(event) => {
+      console.log(event.payload);
+      setStegImage(event.payload.message as string);
+    }).then((unlisten) => {
+      return () => {
+        unlisten();
+      };
+    });
+  }, []);
+  ...
+  return(
+    ...
+    <button
+      onClick={() => {
+        invoke("steganography", {
+          path: filePath,
+          message: message,
+          pass: password,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }} >
+          ...
+    </button>
+    ...
+  )
+
+}
+```
+
+Here we are listening to the `stegImage` event that is emitted by tauri and sets the required image in the react frontend.
+
+## Report (IEEE Format)
+
+{" "}
+
+<object
+  data="/content/projects/Crypto-Paper.pdf"
+  type="application/pdf"
+  width="700"
+  height="700"
+>
+  <embed src="/content/projects/Crypto-Paper.pdf">
+    <p>
+      This browser does not support PDFs. Please download the PDF to view it:{" "}
+      <a href="http://yoursite.com/the.pdf">Download PDF</a>.
+    </p>
+  </embed>
+</object>

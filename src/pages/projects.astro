@@ -1,0 +1,42 @@
+---
+import BaseLayout from "src/layouts/BaseLayout.astro";
+import projects from "../../public/projects.svg?raw";
+---
+
+<BaseLayout title="Projects">
+  <h1>Projects</h1>
+
+  <Fragment set:html={projects} />
+
+  <script is:inline>
+    window.addEventListener("load", () => {
+      let svg = document.querySelector("svg");
+      svg.setAttribute("preserveAspectRatio", "none");
+      let rects = document.querySelectorAll("rect");
+
+      rects.forEach((rect) => {
+        console.log(rect);
+        rect.addEventListener("click", (e) => {
+          if(e.target.getAttribute("fill").includes("#pattern8")){
+            window.location.href = "https://blitzjs.com";
+          } else if(e.target.getAttribute("fill").includes("#pattern10")){
+            window.location.href = "/projects/image-steganography";
+          } else if(e.target.getAttribute("fill").includes("#pattern4")){
+            window.location.href = "https://0xticket.vercel.app";
+          } 
+        });
+        rect.addEventListener("mouseenter", (e) => {
+          e.target.style.cursor = "pointer";
+          if (e.target.getAttribute("fill").includes("url")) {
+            e.target.style.transform = "scale(1.02)";
+            svg.append(rect);
+          }
+        });
+        rect.addEventListener("mouseleave", (e) => {
+          e.target.style.cursor = "default";
+          e.target.style.transform = "scale(1)";
+        });
+      });
+    });
+  </script>
+</BaseLayout>

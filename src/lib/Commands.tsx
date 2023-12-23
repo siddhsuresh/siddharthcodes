@@ -40,7 +40,7 @@ export function Commands({
 
   return (
     <CommandCenter inputId={INPUT_ID}>
-      <CommandCenterTrigger class="zaduma-hover-before w-12 h-12 -mx-4 rounded-sm dark:text-gray-400 dark:hover:text-gray-300" />
+      <CommandCenterTrigger class="zaduma-hover-before w-12 h-12 scale-125 -mx-4 rounded-sm dark:text-white dark:hover:text-white dark:before:bg-gray-800/60" />
       <Show when={clientside()} keyed>
         <CommandsPalette posts={posts} />
       </Show>
@@ -191,13 +191,13 @@ export function CommandsPalette({
                 </CommandItem>
               </CommandGroup>
               <CommandGroup heading={<GroupHeading>Links</GroupHeading>}>
-                <CommandItem href="https://twitter.com/hasparus">
+                <CommandItem href="https://twitter.com/siddsuresh">
                   Twitter
                 </CommandItem>
-                <CommandItem href="https://github.com/hasparus/zaduma">
+                <CommandItem href="https://github.com/siddhsuresh">
                   GitHub
                 </CommandItem>
-                <CommandItem href="https://github.com/hasparus/zaduma/issues">
+                <CommandItem href="https://github.com/siddhsuresh">
                   Contact
                 </CommandItem>
                 <CommandItem href="/rss.xml">RSS</CommandItem>

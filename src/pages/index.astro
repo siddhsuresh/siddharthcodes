@@ -1,9 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { formatDate } from "../lib/formatDate";
 import { Link } from "../lib/Link";
-import { Paragraph } from "../lib/prose/Paragraph";
 import type { PostFrontmatter } from "../types";
+import { Paragraph } from "../lib/prose/Paragraph";
 
 let posts = await Astro.glob<PostFrontmatter>("../../posts/**/*.mdx");
 
@@ -19,54 +18,142 @@ posts.sort((a, b) => {
 });
 ---
 
-<BaseLayout
-  title="zaduma"
-  description="Astro starter template for understated personal websites using Solid.js, Tailwind CSS, and MDX."
->
-  <h1 slot="header-content" class="text-gray-600 dark:text-gray-500">zaduma</h1>
-  <main class="py-10 zaduma-prose">
-    <Paragraph>
-      <small class="text-gray-600 dark:text-gray-500"
-        >IPA /zaˈdu.ma/ — reverie, musing</small
-      >
-      <br />
-       is an Astro starter template for understated personal websites
-    </Paragraph>
-    <Paragraph class="mt-6">
-      Learn about it by reading the articles below, take a look at the
-      <Link href="https://github.com/hasparus/zaduma">readme</Link>, or boldly
-      <Link href="https://github.com/hasparus/zaduma/generate">
-        {"create a new repository"}
-      </Link>. I wish you a pleasant journey.
-    </Paragraph>
-  </main>
-  <ul>
-    {
-      posts.map(({ frontmatter }) => {
-        const date = new Date(frontmatter.date);
+<BaseLayout title="Siddharth Suresh | Home" description="Siddharth Suresh's Personal Website">
 
-        return (
-          <li>
-            <Link
-              href={frontmatter.path}
-              class="flex flex-row gap-2 justify-between"
-              noUnderline
-            >
-              <h2 class="text-gray-800 dark:text-gray-300 font-sans">
-                {frontmatter.title}
-              </h2>
-              <time
-                datetime={date.toISOString()}
-                class="text-gray-600 dark:text-gray-400 tabular-nums tracking-tighter shrink-0"
-              >
-                {formatDate(date)}
-              </time>
-            </Link>
-          </li>
-        );
-      })
-    }
-  </ul>
+<script src="../lib/threejs/animation.ts"></script>
+
+<div id="world"></div>
+<div class="" id="homeWorld">
+  <div class="min-h-screen overflow-auto relative">
+    <h1
+      id="name"
+      class="absolute top-[40%] flex items-center justify-center w-full text-center left-1/2 xl:text-8xl text-3xl text-white font-bold -translate-x-1/2 -translate-y-1/2"
+      style="display: none;"
+    >
+      Siddharth Suresh
+    </h1>
+
+    <p
+      id="description"
+      class="absolute flex w-full flex-col bottom-[50%] left-1/2 xl:text-2xl text-lg text-center text-white font-bold -translate-x-1/2 translate-y-1/2"
+    >
+      Full Stack Developer & Open Source Enthusiast
+    </p>
+
+    <a
+      id="description"
+      href="/projects"
+      class="absolute flex w-full flex-col bottom-[18%] left-1/2 xl:text-2xl text-lg text-center text-white font-bold -translate-x-1/2 translate-y-1/2"
+    >
+      View My Projects ->
+    </a>
+  </div>
+
+  <div class="min-h-screen bg-[#0e2954c2] xl:p-16 p-3 -m-8" id="vprojects">
+    <p
+      id="viewProjects"
+      class="xl:text-4xl lg:text-2xl md:text-lg text-md text-white font-bold text-start p-10"
+    >
+      About Me
+    </p>
+    <div
+      class="flex xl:flex-row flex-col items-center justify-around gap-10 xl:text-xl text-lg"
+    >
+      <div class="xl:w-[60%]">
+        <Paragraph class="mt-6 xl:text-justify leading-8">
+          Hey there! I'm Siddharth Suresh. I am full stack developer and a
+          student at Vellore Institute of Technology, Chennai pursuing B.Tech in
+          Computer Science with a Specialization in Cyber Physical Systems.
+        </Paragraph>
+        <Paragraph class="mt-6 xl:text-justify leading-8">
+          I'm excited to share my journey as a TypeScript Full Stack Developer
+          and my contributions to the open-source community, particularly my
+          work as a Core Team Member and Maintainer of
+          <Link href="https://www.blitzjs.com">⚡ Blitz.js</Link> .
+        </Paragraph>
+        <Paragraph class="mt-6 xl:text-justify leading-8">
+          As a developer, I have a strong foundation in Data Structures and
+          Algorithms which has helped me develop the skills necessary to solve
+          complex problems and build efficient systems. I am constantly looking
+          for new challenges and am always eager to learn new technologies,
+          which makes me passionate about languages and frameworks such as Rust
+          and Phoenix (Elixir).
+        </Paragraph>
+        <Paragraph class="mt-6 xl:text-justify leading-8" id="aboutMe">
+          I'll be sharing my experiences, insights, and learnings as a emerging
+          TypeScript Full Stack Developer, as well as my journey as a
+          contributor to the open-source community in the form of blog posts.
+        </Paragraph>
+      </div>
+      <div class="xl:w-1/3 flex flex-col gap-10 items-center justify-center">
+        <Paragraph
+          class="xl:text-2xl lg:text-xl md:text-lg text-md font-bold text-center"
+        >
+          My Tech Stack
+        </Paragraph>
+        <div class="grid grid-cols-3 gap-16">
+          <img src="/logos/nextjs.png" />
+          <img src="/logos/blitz.png" />
+          <img src="/logos/react.png" />
+          <img src="/logos/tanstack.png" />
+          <img src="/logos/tailwind.png" />
+          <img src="/logos/prisma.png" />
+          <img src="/logos/typescript.png" />
+          <img src="/logos/storybook.png" />
+          <img src="/logos/vscode.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tooltip"></div>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+  h1,
+  a,
+  p {
+    font-family: "Press Start 2P", cursive;
+    color: #fff;
+  }
+
+  #world {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100%;
+    min-height: 100vh;
+    /* background: #092635; */
+    /* background: linear-gradient(#e9a178, #102c57 20rem, #0e2954); */
+    /* make it a conic gradien */
+    background: linear-gradient(#e9a178, #102c57 50%, #0e2954);
+    z-index: -1;
+    /* make world stay as is while scrolling */
+    transform: translateZ(0);
+  }
+
+  #tooltip {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5rem;
+    background: #104b68da;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem rgb(0, 0, 0);
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+  }
+</style>
+
+  <h1 slot="header-content" class="text-white font-mono text-xl">
+    <Link href="/">
+      siddharth.codes
+    </Link>
+  </h1>
   <style>
     ul:hover li:not(:hover) :where(h2, time) {
       @apply text-gray-600 transition-colors;

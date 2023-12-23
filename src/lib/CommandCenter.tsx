@@ -116,9 +116,9 @@ export function CommandCenter(props: CommandCenterProps) {
 
       selectCommand((prev) => {
         const commands = getOptions();
-        const current: HTMLElement | null = dialog.querySelector(
-          '[aria-selected="true"]',
-        );
+        const current = dialog.querySelector(
+          '[aria-selected="true"]'
+        ) as HTMLElement;
 
         if (!current) {
           const next = move === 1 ? commands[0] : commands.at(-1);
@@ -266,7 +266,7 @@ export function CommandItem(props: CommandItemProps) {
     if (selected) {
       setTimeout(
         () => res.scrollIntoView({ block: "center", behavior: "smooth" }),
-        0,
+        0
       );
       onCleanup(() => {
         if (isSelected(text)) onSelectedUnmount();
@@ -339,7 +339,7 @@ function getCommandText(element: HTMLElement) {
 }
 
 export function CommandList(
-  props: Omit<JSX.HTMLAttributes<HTMLDivElement>, "id">,
+  props: Omit<JSX.HTMLAttributes<HTMLDivElement>, "id">
 ) {
   const { listId, isSelected, selectOption } = useCommandCenterCtx();
 
@@ -355,9 +355,7 @@ export function CommandList(
             break;
           }
 
-          const first: HTMLElement | null =
-            child.querySelector("[role=option]");
-
+          const first = child.querySelector("[role=option]") as HTMLElement;
           if (first) {
             selectOption(first);
             break;

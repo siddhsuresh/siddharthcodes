@@ -124,7 +124,7 @@ if (isRaw) {
   if (!width && !height && !props.aspectRatio) {
     width ??= metadata.width;
     props.aspectRatio ??= metadata.width / metadata.height;
-    width = Math.min(width, WIDE_CONTAINER_WIDTH);
+    width = Math.min(Number(width), WIDE_CONTAINER_WIDTH);
     height = Math.round(width / parseFloat(props.aspectRatio as string));
   }
 }

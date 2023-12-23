@@ -49,5 +49,5 @@ function createDeploymentAlias() {
     .replace(/-+/g, "-")
     .toLowerCase();
 
-  return `${refSlug}--zaduma.vercel.app`;
+  return `${refSlug}--siddharthcodes.vercel.app`;
 }
