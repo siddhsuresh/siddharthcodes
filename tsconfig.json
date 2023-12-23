@@ -1,0 +1,10 @@
+{
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "lib": ["DOM"],
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "skipLibCheck": true
+  },
+  "include": ["src", "api", "*.ts"]
+}

@@ -1,0 +1,54 @@
+{
+  "prettier.documentSelectors": ["**/*.astro"],
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "astro"
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "astro"
+  ],
+
+  "files.associations": {
+    "*.css": "css"
+  },
+
+  "css.customData": ["./.vscode/css-custom-data.json"],
+  "css.validate": false,
+
+  "tailwindCSS.experimental.classRegex": [
+    ["classList={{([^)]*)}}", "\"([^\"]*)\""],
+    ["classList={{([^)]*)}}", "`([^`]*)`"],
+    ["classList={{([^)]*)}}", "'([^']*)'"],
+    // For api/og.ts
+    ["tw: \"([^\"]*)\""],
+    ["tw: `([^`]*)`"]
+  ],
+
+  "typescript.tsdk": "node_modules/typescript/lib",
+
+  "grammarly.selectors": [
+    {
+      "language": "markdown",
+      "scheme": "file",
+      "pattern": "posts/**/*.mdx"
+    },
+    {
+      "language": "markdown",
+      "scheme": "file",
+      "pattern": "posts/**/*.md"
+    },
+    {
+      "language": "mdx",
+      "scheme": "file"
+    }
+  ]
+}
