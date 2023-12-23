@@ -127,7 +127,7 @@ export function CommandCenter(props: CommandCenterProps) {
           return getCommandText(next);
         }
 
-        const index = commands.indexOf(current);
+        const index = commands.indexOf(current as HTMLElement);
         const nextIndex = (index + move + commands.length) % commands.length;
 
         return getCommandText(commands[nextIndex]!);
