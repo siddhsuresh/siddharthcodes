@@ -1,7 +1,6 @@
 ---
-import brygadaPath from "@fontsource-variable/brygada-1918/files/brygada-1918-latin-wght-italic.woff2";
-import interPath from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2";
-
+import SourceCodeProPath from "../../assets/SourceCodePro-VariableFont_wght.ttf";
+import StartPress2pPath from "../../assets/Press/PressStart2P-Regular.ttf";
 import InitColorScheme from "../lib/color-scheme/InitColorScheme.astro";
 import { Commands } from "../lib/Commands";
 import GrainOverlay from "../lib/GrainOverlay/GrainOverlay.astro";
@@ -42,15 +41,18 @@ posts.sort((a, b) => {
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     {
-      [interPath, brygadaPath].map((href) => (
+      [SourceCodeProPath,StartPress2pPath].map((href) => (
         <link
           rel="preload"
           href={href}
           as="font"
-          type="font/woff2"
+          type="font/ttf"
           crossorigin
         />
       ))
@@ -64,7 +66,7 @@ posts.sort((a, b) => {
     <InitColorScheme />
   </head>
   <body>
-    <div class="px-4">
+    <div class="p-4">
       <header
         class="flex justify-between items-center -mt-2"
         style={{ height: "37.5px" }}
