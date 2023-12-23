@@ -7,13 +7,6 @@
 import { ImageResponse } from "@vercel/og";
 import type * as React from "react";
 
-const author = {
-  name: "siddharth.codes",
-  avatarSrc: "https://avatars.githubusercontent.com/u/83594610?v=4",
-};
-
-type Author = typeof author;
-
 export const config = { runtime: "edge" };
 
 const width = 1200;
@@ -36,7 +29,7 @@ export default async function og(req: Request) {
           h(LeftSide, {
             children: [
               h(Title, { title: post.title }),
-              h(Footer, { author, post }),
+              h(Footer, { post }),
             ],
           }),
           h(RightSide, {
@@ -95,7 +88,7 @@ function Title({ title }: { title: string }) {
   );
 }
 
-function Footer({ author, post }: { author: Author; post: Post }) {
+function Footer({ post }: {post: Post }) {
   return h(
     "div",
     {
