@@ -61,10 +61,8 @@ export default async function og(req: Request) {
 
 function Illustration({
   imageHref,
-  isExternal,
 }: {
   imageHref: string;
-  isExternal?: boolean;
 }) {
   imageHref = `https://${process.env.VERCEL_URL}${imageHref}`;
 
