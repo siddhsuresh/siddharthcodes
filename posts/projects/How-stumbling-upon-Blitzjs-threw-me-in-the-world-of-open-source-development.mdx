@@ -1,0 +1,85 @@
+---
+title: "My Blitz.js Journey"
+---
+
+# How stumbling upon Blitz.js threw me in the world of open source development.
+![""](/blitzjs.png)
+
+Hey fellow developers! Today, I'm excited to share a more personal side of my journey as a core team member of Blitz.js, an adventure that's been both challenging and incredibly rewarding. 
+
+## How it all began
+
+At this point, in the start of August 2022, I had been a user of the Blitz.js stack for about 4 months using it for its incredible DX and as a base template for my various projects, let it be my university work or otherwise. My typescript knowledge was pretty basic and knowledge of how any package actually works was non-existent.
+
+A unique requirement from my university gave me the real nudge to actually start contributing to Blitz.js and right in time for their launch of their first 2.0 beta.
+
+## Uncovering My First Issue
+
+I am sure many first time contributors might be facing the same trouble in choosing the right first issue, in my case, I chose an relatively inactive issue with high value that would improve the migration `codemod` to move the legacy `blitz.config.ts` to `next.config.js` and migrate the config. 
+
+[Fix the way next.config.js file is created by the codemod](https://github.com/blitz-js/blitz/pull/3709) was where I left my first mark on the framework and since it was high value, I received an immediate response from the team and was able to merge it after a suspenseful 3 re-reviews 
+
+In a week's time, the [first beta was out](https://github.com/blitz-js/blitz/releases/tag/v2.0.0-beta.1) and I received my first credit for being part of this journey.
+
+## Navigating the Upgrade: Migration from 1.0 to 2.0
+
+Blitz.js 2.0 was a complete rewrite of the old logic, which was coupled directly with Next.js, into an extendable plugin based toolkit framework. With this rewrite came the need to migrate the core features of the 1.0 codebase, without regressions.
+
+Now that the first beta was out, I was at the lookout for the issues that would unblock the release of the stable, but in this phase of my journey, I was still a new contributor whose main experience was working on the `codemod`. Wanting to change that, I took up work of different requirements to improve my knowledge of the codebase.
+
+### The CI
+
+The issue was simple just [Add windows testing support to CI](https://github.com/blitz-js/blitz/issues/3271), as with any software development, we will see the hidden difficulty only after actually working on it. 
+In this case it was a two PR solution to this issue, making all the testing run in parallel jobs and unearthing a bonus bug that makes "nested resolvers" not work in windows through the tests.
+
+1. https://github.com/blitz-js/blitz/pull/3799: 
+Upto this point the workflow file was a single job running `lint`, `build` and `test` which was highly inefficient, so fixing that and also getting the added bonus of finding a bug that makes "nested resolvers" not work in windows through the tests.
+2. https://github.com/blitz-js/blitz/pull/3824
+After the use of the previous workflow for a week, published a new workflow that contains a quirky `bash` script to get all the `integration tests` and run each in parallel, drastically reducing the flakiness of the tests.
+
+### The CLI
+
+Another aspect of this migration was to improve the existing CLI and re-add them to the new codebase. I worked on the migration and improvement of the `blitz console` and `blitz routes` commands.
+
+## Promotion to Collaborator
+
+Fast forward to the end of September and 16 commits in, I receive a message from the lead developer [@beerose](https://github.com/beerose) of the project, on my willingness to become a "Level 1 Maintainer" and officially add me as a collaborator to the repository, allowing me to disband the need of a fork and manual work keeping it up to date.
+
+## Dive into Feature Development
+
+Now we are getting to the pivotal part. Upto this point, although I had been working on high value issues moving the project to its stable release, I was not really adding anything to the project that a end user could see or use, so I started looking for issues that I wished was there in the framework.
+
+Featured work:
+
+### [Add GET support to RPC specification](https://github.com/blitz-js/blitz/pull/3891)
+
+Previously, Blitz.js resolver could only resolve to be a `POST` request and had no configurable way to change that. This brought about disadvantages on scenarios where we could no longer cache the result of unauthorised resolvers.
+
+In short, the work needed to be done here, was sync parsing of the resolver file before `webpack` transforms it using `swc` and extracting a `config` export's `httpMethod` property. This is then passed to both the RPC handler and the client fetch call.
+
+### [Decouple Blitz RPC and Blitz Auth](https://github.com/blitz-js/blitz/pull/3943)
+
+Until this PR, in order to use Blitz RPC we had to have Blitz Auth installed, breaking the paradigm of the independence of the libraries.
+
+This was my first time working with [@flybayer](https://github.com/flybayer) (Brandon Bayer), the creator of Blitz.js himself, in order to design is best solution to be adopted here and the proposal was to implement a long thought about client side plugin system that will connect the various plugins of the toolkit using `middleware` and `events`.
+
+### [Next 13 App directory support](https://github.com/blitz-js/blitz/pull/4079)
+
+I am sure any library developers reading this would understand how big of deal this major was, the issue was that now Blitz.js has to now support both the `app` and `pages` routers of Next.js and it when the `app` directory (in February 2023) was still in `beta` and had some of missing docs and the understanding and the way React Server Components worked was still mysterious.
+
+The work that needed to be done here, in short, was to add `"use client"` to the top of the client side exports of all the libraries. Restructure the usage of `react-query` as it can be used only in the client. Create and design new API's to access the auth context in the server and a way for the RPC to use it in a predictable way.
+
+### [Multiple fields forms using templates during generation](https://github.com/blitz-js/blitz/pull/3869)
+
+Now this was one of the longest running large PR's I have ever managed, almost 2,000 lines and 60 files changed and it being worked on and thoroughly tested for 6 months before its final approval and merge.
+
+So, the idea here was to extend the functionality of the already excellent `blitz generate` command with this simple necessity of being able to re-run the command with new fields and it leaving the existing fields intact.
+
+> 1. `blitz generate all project name:string` -> generates all new files
+> 2. `blitz generate all project description:string` -> updates existing files with new description field
+ 
+It was the combined effort 3 developers over 2 years, [@maastrich](https://github.com/maastrich) and [@Roesh](https://github.com/Roesh) both worked on the issue before I took it to completion and provided most of the necessary base needed to get this up and running.
+
+## Promotion to Core Team & Internship
+
+In the start of 2023, I joined [Flightcontrol](https://www.flightcontrol.dev/) as a part-time intern and became part of the core team of Blitz.js responsible for the maintenance and feature development of the framework and it was such a great feeling of achievement.
