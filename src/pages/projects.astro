@@ -1,11 +1,14 @@
 ---
 import BaseLayout from "src/layouts/BaseLayout.astro";
 
-import projects from "../../public/projects.svg?raw";
+import projects from "../images/projects.svg?raw";
 ---
 
-<BaseLayout title="Projects">
-  <h1>Projects</h1>
+<BaseLayout title="Projects" description="A list of projects I've worked on.">
+  <div class="absolute inset-0 overflow-hidden -z-10">
+    <div class="jumbo absolute -inset-[10px] opacity-20"></div>
+  </div>
+  <h1 class="p-10 text-center text-4xl font-bold">My Featured Work</h1>
 
   <Fragment set:html={projects} />
 
@@ -18,13 +21,13 @@ import projects from "../../public/projects.svg?raw";
       rects.forEach((rect) => {
         console.log(rect);
         rect.addEventListener("click", (e) => {
-          if(e.target.getAttribute("fill").includes("#pattern8")){
+          if (e.target.getAttribute("fill").includes("#pattern8")) {
             window.location.href = "https://blitzjs.com";
-          } else if(e.target.getAttribute("fill").includes("#pattern10")){
+          } else if (e.target.getAttribute("fill").includes("#pattern10")) {
             window.location.href = "/projects/image-steganography";
-          } else if(e.target.getAttribute("fill").includes("#pattern4")){
+          } else if (e.target.getAttribute("fill").includes("#pattern4")) {
             window.location.href = "https://0xticket.vercel.app";
-          } 
+          }
         });
         rect.addEventListener("mouseenter", (e) => {
           e.target.style.cursor = "pointer";
@@ -41,3 +44,80 @@ import projects from "../../public/projects.svg?raw";
     });
   </script>
 </BaseLayout>
+
+<style>
+  h1,
+  a,
+  p {
+    font-family: "Press Start 2P", cursive;
+  }
+  @keyframes jumbo {
+    from {
+      background-position:
+        50% 50%,
+        50% 50%;
+    }
+    to {
+      background-position:
+        350% 50%,
+        350% 50%;
+    }
+  }
+
+  .jumbo {
+    --stripes: repeating-linear-gradient(
+      100deg,
+      #fff 0%,
+      #fff 7%,
+      transparent 10%,
+      transparent 12%,
+      #fff 16%
+    );
+    --stripesDark: repeating-linear-gradient(
+      100deg,
+      #000 0%,
+      #000 7%,
+      transparent 10%,
+      transparent 12%,
+      #000 16%
+    );
+    --rainbow: repeating-linear-gradient(
+      100deg,
+      #60a5fa 10%,
+      #e879f9 15%,
+      #60a5fa 20%,
+      #5eead4 25%,
+      #60a5fa 30%
+    );
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 300%, 200%;
+    background-position:
+      50% 50%,
+      50% 50%;
+
+    filter: blur(10px) invert(100%);
+
+    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+
+    pointer-events: none;
+  }
+
+  .jumbo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 200%, 100%;
+    animation: jumbo 60s linear infinite;
+    background-attachment: fixed;
+    mix-blend-mode: difference;
+  }
+
+  .dark .jumbo {
+    background-image: var(--stripesDark), var(--rainbow);
+    filter: blur(10px) opacity(50%) saturate(200%);
+  }
+  .dark .jumbo::after {
+    background-image: var(--stripesDark), var(--rainbow);
+  }
+</style>

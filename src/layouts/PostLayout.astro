@@ -1,6 +1,6 @@
 ---
 import type { MarkdownLayoutProps } from "astro";
-
+import Image from "../lib/prose/Image.astro"
 import { createOgImageLink } from "../lib/createOgImageLink";
 import { formatDate } from "../lib/formatDate";
 import TableOfContents from "../lib/TableOfContents/TableOfContents.astro";
@@ -9,6 +9,7 @@ import type { PostFrontmatter } from "../types";
 import BaseLayout from "./BaseLayout.astro";
 
 import "../global-styles/shiki.css";
+import { Link } from "src/lib/Link";
 
 interface Props extends Omit<MarkdownLayoutProps<{}>, "frontmatter"> {
   frontmatter: PostFrontmatter;
@@ -20,15 +21,16 @@ const ogImage = createOgImageLink(frontmatter);
 const readingTime = frontmatter.readingTime;
 const date = new Date(frontmatter.date);
 const description = frontmatter.description || ""
+const imgSrc =
+  typeof frontmatter.img === "object" ? frontmatter.img.src : frontmatter.img;
 ---
 
+<main class="zaduma-prose py-4 max-w-container mx-auto ">
 <BaseLayout title={frontmatter.title} ogImage={ogImage} description={description}>
-  <main class="zaduma-prose py-4 max-w-container mx-auto ">
+  <Link href="/projects" slot="header-content">← projects</Link>
     <header
-      class="flex justify-between items-start sm:items-center flex-col sm:flex-row"
+      class="pt-4 flex justify-between items-start sm:items-center flex-col sm:flex-row"
     >
-      <h1 class="!my-0">{frontmatter.title}</h1>
-      <div class="text-gray-600 dark:text-gray-400 text-right">
         {
           readingTime.minutes > 1 && (
             <>
@@ -43,11 +45,16 @@ const description = frontmatter.description || ""
         >
           {formatDate(date)}
         </time>
-      </div>
     </header>
+    <h1 class="text-4xl font-bold leading-tight mt-4 mb-8">
+      {frontmatter.title}
+    </h1>
+    {
+      imgSrc && (
+        <Image alt="" src={imgSrc} format="webp" width={774} aspectRatio={2} />
+      )
+    }
     <slot />
-  </main>
-  <TableOfContents headings={headings} />
   <style is:global>
      {
       /* make the spacing even when there's no callout nor image */
@@ -57,3 +64,6 @@ const description = frontmatter.description || ""
     }
   </style>
 </BaseLayout>
+</main>
+<TableOfContents headings={headings} />
+
