@@ -1,0 +1,225 @@
+---
+import BaseLayout from "src/layouts/BaseLayout.astro";
+import flightcontrolImage from "../images/flightcontrol.png";
+import blitzjsImage from "../images/blitzjs.png";
+---
+
+<BaseLayout title="Siddharth Suresh | Work Experience" description="My Work Experience">
+  <div class="absolute inset-0 -z-10 overflow-hidden">
+    <div class="jumbo absolute -inset-[10px] opacity-20"></div>
+  </div>
+  <div class="flex flex-col gap-10 p-4">
+    <h1 class="text-center font-bold md:text-2xl xl:text-4xl">
+      Work Experience
+    </h1>
+
+    <div class="image-grid grid">
+      <div class="grid-block w-full">
+        <div class="tile flex w-full flex-row justify-between gap-10">
+          <a
+            class="tile-link w-3/4"
+            href="/open-source/How-stumbling-upon-Blitzjs-threw-me-in-the-world-of-open-source-development"
+          >
+            <img
+              class="tile-img tile-img10"
+              src={blitzjsImage.src}
+              alt="Image"
+            />
+          </a>
+          <div class="flex w-1/4 flex-col gap-4">
+            <h2 class="font-mono text-xl font-bold">Blitz.js</h2>
+            <ul class="list-disc gap-5">
+              <li>Contributor Since August 2022</li>
+              <li>Core Team Member Since January 2023</li>
+              <li>100+ Commits</li>
+            </ul>
+            <p>
+              Read more about my journey with Blitz.js{" "}
+              <a
+                class="underline"
+                href="/open-source/How-stumbling-upon-Blitzjs-threw-me-in-the-world-of-open-source-development"
+              >
+                here
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-block w-full">
+        <div class="tile flex w-full flex-row justify-between gap-10">
+          <a class="tile-link w-3/4" href="https://flightcontrol.dev">
+            <img
+              class="tile-img tile-img10"
+              src={flightcontrolImage.src}
+              alt="Image"
+            />
+          </a>
+          <div class="flex w-1/4 flex-col gap-4">
+            <h2 class="font-mono text-xl font-bold">Flightcontrol</h2>
+            <ul class="list-disc gap-5">
+              <li>Blitz.js Maintaince and Feature Development</li>
+              <li>Joined as full time intern in May 2023</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    h1,
+    h2 {
+      font-family: "Press Start 2P", cursive;
+    }
+    @keyframes jumbo {
+      from {
+        background-position:
+          50% 50%,
+          50% 50%;
+      }
+      to {
+        background-position:
+          350% 50%,
+          350% 50%;
+      }
+    }
+
+    .jumbo {
+      --stripes: repeating-linear-gradient(
+        100deg,
+        #fff 0%,
+        #fff 7%,
+        transparent 10%,
+        transparent 12%,
+        #fff 16%
+      );
+      --stripesDark: repeating-linear-gradient(
+        100deg,
+        #000 0%,
+        #000 7%,
+        transparent 10%,
+        transparent 12%,
+        #000 16%
+      );
+      --rainbow: repeating-linear-gradient(
+        100deg,
+        #60a5fa 10%,
+        #e879f9 15%,
+        #60a5fa 20%,
+        #5eead4 25%,
+        #60a5fa 30%
+      );
+      background-image: var(--stripes), var(--rainbow);
+      background-size: 300%, 200%;
+      background-position:
+        50% 50%,
+        50% 50%;
+
+      filter: blur(10px) invert(100%);
+
+      mask-image: radial-gradient(
+        ellipse at 100% 0%,
+        black 40%,
+        transparent 70%
+      );
+
+      pointer-events: none;
+    }
+
+    .jumbo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--stripes), var(--rainbow);
+      background-size: 200%, 100%;
+      animation: jumbo 60s linear infinite;
+      background-attachment: fixed;
+      mix-blend-mode: difference;
+    }
+
+    .dark .jumbo::after {
+      background-image: var(--stripesDark), var(--rainbow);
+    }
+
+    .grid {
+      width: 100%;
+      max-width: 80rem;
+      margin-left: auto;
+      margin-right: auto;
+
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 40rem) {
+      .grid {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        flex-wrap: wrap;
+      }
+    }
+
+    .grid-block {
+      min-height: 11.25rem;
+      padding: 1rem;
+    }
+
+    .image-grid .tile-link:hover .tile-img {
+      top: -1rem;
+      left: -1rem;
+    }
+
+    .image-grid .tile-img {
+      position: relative;
+      top: 0;
+      left: 0;
+      -webkit-transition-property: opacity, top, left, box-shadow;
+      transition-property: opacity, top, left, box-shadow;
+    }
+
+    .tile-link {
+      display: block;
+    }
+
+    .tile-link:hover .tile-img {
+      opacity: 1;
+    }
+
+    .tile-link:hover .tile-img-link {
+      display: block;
+    }
+
+    .tile-link:hover .tile-img-link:hover .tile-img {
+      opacity: 0.5;
+    }
+
+    .tile-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: 1;
+      -webkit-transition-property: opacity;
+      transition-property: opacity;
+      -webkit-transition-duration: 0.125s;
+      transition-duration: 0.125s;
+      -webkit-transition-timing-function: ease-in;
+      transition-timing-function: ease-in;
+    }
+
+    .tile-link:hover .tile-img10 {
+      box-shadow:
+        5px 5px rgba(4, 140, 231, 0.4),
+        10px 10px rgba(4, 140, 231, 0.3),
+        15px 15px rgba(4, 140, 231, 0.2),
+        20px 20px rgba(4, 140, 231, 0.1),
+        25px 25px rgba(4, 140, 231, 0.05);
+    }
+  </style>
+</BaseLayout>

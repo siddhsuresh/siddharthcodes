@@ -15,7 +15,7 @@ export const get = () =>
     description: "",
     // base URL for RSS <item> links
     // SITE will use "site" from your project's astro.config.
-    site: "https://haspar.us",
+    site: "https://siddharth.codes",
     // list of `<item>`s in output xml
     // simple example: generate items for every md file in /src/pages
     // see "Generating items" section for required frontmatter and advanced use cases

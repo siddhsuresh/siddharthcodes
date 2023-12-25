@@ -39,7 +39,7 @@ posts.sort((a, b) => {
         id="description"
         class="absolute bottom-[50%] left-1/2 flex w-full -translate-x-1/2 translate-y-1/2 flex-col text-center text-lg font-bold text-white xl:text-2xl"
       >
-        Full Stack Developer & Open Source Enthusiast
+        full stack developer & open source enthusiast
       </p>
 
       <svg
@@ -115,6 +115,11 @@ posts.sort((a, b) => {
     </div>
   </div>
 
+  <h1 slot="header-content" class="flex gap-4 font-mono text-white">
+    <Link href="/projects">projects</Link>
+    <Link href="/work">work</Link>
+  </h1>
+
   <div id="tooltip"></div>
 
   <style>
@@ -155,12 +160,6 @@ posts.sort((a, b) => {
       color: white;
     }
   </style>
-
-  <h1 slot="header-content" class="font-mono text-white flex gap-4">
-    <Link href="/projects">projects</Link>
-    <Link href="/posts">posts</Link>
-    <Link href="/contactme">contact me</Link>
-  </h1>
   <style>
     ul:hover li:not(:hover) :where(h2, time) {
       @apply text-gray-600 transition-colors;

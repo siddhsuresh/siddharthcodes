@@ -21,9 +21,11 @@ interface Props {
   children: astroHTML.JSX.Element;
   ogImage?: string;
   className?: string;
+  viewTransition?: boolean;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, viewTransition } = Astro.props;
+console.log({ title, description, ogImage, viewTransition });
 
 const posts = (await Astro.glob<PostFrontmatter>("../../posts/**/*.mdx"))
   .filter((p) => (import.meta.env.PROD ? !p.frontmatter.draft : true))
