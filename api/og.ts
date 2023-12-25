@@ -27,11 +27,7 @@ export default async function og(req: Request) {
             ],
           }),
           h(RightSide, {
-            children: [
-              h(Illustration, {
-                imageHref: post.img.replace(/\\/g, ""),
-              }),
-            ],
+            children: [h(Illustration, { imageHref: post.img })],
           }),
         ],
       }),
@@ -57,8 +53,12 @@ export default async function og(req: Request) {
   }
 }
 
-function Illustration({ imageHref }: { imageHref: string }) {
-  imageHref = `https://siddharthcodes.vercel.app/${imageHref}`;
+function Illustration({
+  imageHref,
+}: {
+  imageHref: string;
+}) {
+  imageHref = `https://siddharthcodes.vercel.app${imageHref}`;
 
   return h("img", {
     tw: `w-full h-full`,
@@ -80,7 +80,7 @@ function Title({ title }: { title: string }) {
   );
 }
 
-function Footer({ post }: { post: Post }) {
+function Footer({ post }: {post: Post }) {
   return h(
     "div",
     {
@@ -95,7 +95,7 @@ function Footer({ post }: { post: Post }) {
         text-4xl font-black text-left
         `,
       },
-      post.title,
+      post.title
     ),
     h(
       "p",
