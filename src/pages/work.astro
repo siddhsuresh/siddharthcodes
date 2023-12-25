@@ -4,7 +4,10 @@ import flightcontrolImage from "../images/flightcontrol.png";
 import blitzjsImage from "../images/blitzjs.png";
 ---
 
-<BaseLayout title="Siddharth Suresh | Work Experience" description="My Work Experience">
+<BaseLayout
+  title="Siddharth Suresh | Work Experience"
+  description="My Work Experience"
+>
   <div class="absolute inset-0 -z-10 overflow-hidden">
     <div class="jumbo absolute -inset-[10px] opacity-20"></div>
   </div>
@@ -14,6 +17,24 @@ import blitzjsImage from "../images/blitzjs.png";
     </h1>
 
     <div class="image-grid grid">
+      <div class="grid-block w-full">
+        <div class="tile flex w-full flex-row justify-between gap-10">
+          <a class="tile-link w-3/4" href="https://flightcontrol.dev">
+            <img
+              class="tile-img tile-img10"
+              src={flightcontrolImage.src}
+              alt="Image"
+            />
+          </a>
+          <div class="flex w-1/4 flex-col gap-4">
+            <h2 class="font-mono text-xl font-bold">Flightcontrol</h2>
+            <ul class="list-disc gap-5">
+              <li>Blitz.js Maintaince and Feature Development</li>
+              <li>Joined as full time intern in May 2023</li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="grid-block w-full">
         <div class="tile flex w-full flex-row justify-between gap-10">
           <a
@@ -42,25 +63,6 @@ import blitzjsImage from "../images/blitzjs.png";
                 here
               </a>
             </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid-block w-full">
-        <div class="tile flex w-full flex-row justify-between gap-10">
-          <a class="tile-link w-3/4" href="https://flightcontrol.dev">
-            <img
-              class="tile-img tile-img10"
-              src={flightcontrolImage.src}
-              alt="Image"
-            />
-          </a>
-          <div class="flex w-1/4 flex-col gap-4">
-            <h2 class="font-mono text-xl font-bold">Flightcontrol</h2>
-            <ul class="list-disc gap-5">
-              <li>Blitz.js Maintaince and Feature Development</li>
-              <li>Joined as full time intern in May 2023</li>
-            </ul>
           </div>
         </div>
       </div>
