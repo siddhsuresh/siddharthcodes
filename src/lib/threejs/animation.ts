@@ -361,7 +361,7 @@ document.addEventListener(
   }
 );
 
-window.addEventListener("load", () => {
+export const setup = () => {
   createScene();
   createLights();
   createSea();
@@ -383,4 +383,8 @@ window.addEventListener("load", () => {
       ease: "elastic.out(1, 0.3)",
     });
   }, 2000);
+}
+
+window.addEventListener("load", () => {
+  setup()
 });

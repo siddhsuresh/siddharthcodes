@@ -1,49 +1,79 @@
 ---
 import BaseLayout from "src/layouts/BaseLayout.astro";
-
-import projects from "../images/projects.svg?raw";
+import flightcontrolImage from "../images/flightcontrol.png";
+import blitzjsImage from "../images/blitzjs.png";
 ---
 
 <BaseLayout title="Projects" description="A list of projects I've worked on.">
-  <div class="absolute inset-0 overflow-hidden -z-10">
+  <div class="absolute inset-0 -z-10 overflow-hidden">
     <div class="jumbo absolute -inset-[10px] opacity-20"></div>
   </div>
-  <h1 class="p-10 text-center text-4xl font-bold">My Featured Work</h1>
+  <div class="flex flex-col gap-10 p-4">
+    <h1 class="text-center xl:text-4xl md:text-2xl font-bold">Work Experience</h1>
 
-  <Fragment set:html={projects} />
+    <div class="image-grid grid">
+      <div class="grid-block">
+        <div class="tile">
+          <a
+            class="tile-link"
+            href="/open-source/How-stumbling-upon-Blitzjs-threw-me-in-the-world-of-open-source-development"
+          >
+            <img
+              class="tile-img tile-img10"
+              src={blitzjsImage.src}
+              alt="Image"
+            />
+          </a>
+        </div>
+      </div>
 
-  <script is:inline>
-    window.addEventListener("load", () => {
-      let svg = document.querySelector("svg");
-      svg.setAttribute("preserveAspectRatio", "none");
-      let rects = document.querySelectorAll("rect");
+      <div class="grid-block">
+        <div class="tile">
+          <a class="tile-link" href="https://flightcontrol.dev">
+            <img
+              class="tile-img tile-img2"
+              src={flightcontrolImage.src}
+              alt="flightcontrol internship"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h1 class="text-center xl:text-4xl md:text-2xl font-bold">Projects</h1>
+</BaseLayout>
 
-      rects.forEach((rect) => {
-        console.log(rect);
-        rect.addEventListener("click", (e) => {
-          if (e.target.getAttribute("fill").includes("#pattern8")) {
-            window.location.href = "https://blitzjs.com";
-          } else if (e.target.getAttribute("fill").includes("#pattern10")) {
-            window.location.href = "/projects/image-steganography";
-          } else if (e.target.getAttribute("fill").includes("#pattern4")) {
-            window.location.href = "https://0xticket.vercel.app";
-          }
-        });
-        rect.addEventListener("mouseenter", (e) => {
-          e.target.style.cursor = "pointer";
-          if (e.target.getAttribute("fill").includes("url")) {
-            e.target.style.transform = "scale(1.02)";
-            svg.append(rect);
-          }
-        });
-        rect.addEventListener("mouseleave", (e) => {
-          e.target.style.cursor = "default";
-          e.target.style.transform = "scale(1)";
-        });
+<script is:inline>
+  window.addEventListener("load", () => {
+    let svg = document.querySelector("svg");
+    svg.setAttribute("preserveAspectRatio", "none");
+    let rects = document.querySelectorAll("rect");
+
+    rects.forEach((rect) => {
+      console.log(rect);
+      rect.addEventListener("click", (e) => {
+        if (e.target.getAttribute("fill").includes("#pattern8")) {
+          window.location.href = "https://blitzjs.com";
+        } else if (e.target.getAttribute("fill").includes("#pattern10")) {
+          window.location.href = "/projects/image-steganography";
+        } else if (e.target.getAttribute("fill").includes("#pattern4")) {
+          window.location.href = "https://0xticket.vercel.app";
+        }
+      });
+      rect.addEventListener("mouseenter", (e) => {
+        e.target.style.cursor = "pointer";
+        if (e.target.getAttribute("fill").includes("url")) {
+          e.target.style.transform = "scale(1.02)";
+          svg.append(rect);
+        }
+      });
+      rect.addEventListener("mouseleave", (e) => {
+        e.target.style.cursor = "default";
+        e.target.style.transform = "scale(1)";
       });
     });
-  </script>
-</BaseLayout>
+  });
+</script>
 
 <style>
   h1,
@@ -119,5 +149,166 @@ import projects from "../images/projects.svg?raw";
   }
   .dark .jumbo::after {
     background-image: var(--stripesDark), var(--rainbow);
+  }
+
+  .grid {
+    width: 100%;
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 40rem) {
+    .grid {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+  }
+
+  .grid-block {
+    width: 80%;
+    min-height: 11.25rem;
+    padding: 1rem;
+  }
+
+  .image-grid .tile-link:hover .tile-img {
+    top: -1rem;
+    left: -1rem;
+  }
+
+  .image-grid .tile-img {
+    position: relative;
+    top: 0;
+    left: 0;
+    -webkit-transition-property: opacity, top, left, box-shadow;
+    transition-property: opacity, top, left, box-shadow;
+  }
+
+  .tile-link {
+    display: block;
+  }
+
+  .tile-link:hover .tile-img {
+    opacity: 1;
+  }
+
+  .tile-link:hover .tile-img-link {
+    display: block;
+  }
+
+  .tile-link:hover .tile-img-link:hover .tile-img {
+    opacity: 0.5;
+  }
+
+  .tile-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 1;
+    -webkit-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transition-duration: 0.125s;
+    transition-duration: 0.125s;
+    -webkit-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+  }
+  .tile-link:hover .tile-img1 {
+    box-shadow:
+      5px 5px rgba(244, 170, 200, 0.4),
+      10px 10px rgba(244, 170, 200, 0.3),
+      15px 15px rgba(244, 170, 200, 0.2),
+      20px 20px rgba(244, 170, 200, 0.1),
+      25px 25px rgba(244, 170, 200, 0.05);
+  }
+
+  .tile-link:hover .tile-img2 {
+    box-shadow:
+      5px 5px rgba(45, 186, 233, 0.4),
+      10px 10px rgba(45, 186, 233, 0.3),
+      15px 15px rgba(45, 186, 233, 0.2),
+      20px 20px rgba(45, 186, 233, 0.1),
+      25px 25px rgba(45, 186, 233, 0.05);
+  }
+
+  .tile-link:hover .tile-img3 {
+    box-shadow:
+      5px 5px rgba(214, 221, 244, 0.4),
+      10px 10px rgba(214, 221, 244, 0.3),
+      15px 15px rgba(214, 221, 244, 0.2),
+      20px 20px rgba(214, 221, 244, 0.1),
+      25px 25px rgba(214, 221, 244, 0.05);
+  }
+
+  .tile-link:hover .tile-img4 {
+    box-shadow:
+      5px 5px rgba(82, 119, 192, 0.4),
+      10px 10px rgba(82, 119, 192, 0.3),
+      15px 15px rgba(82, 119, 192, 0.2),
+      20px 20px rgba(82, 119, 192, 0.1),
+      25px 25px rgba(82, 119, 192, 0.05);
+  }
+
+  .tile-link:hover .tile-img5 {
+    box-shadow:
+      5px 5px rgba(138, 218, 245, 0.4),
+      10px 10px rgba(138, 218, 245, 0.3),
+      15px 15px rgba(138, 218, 245, 0.2),
+      20px 20px rgba(138, 218, 245, 0.1),
+      25px 25px rgba(138, 218, 245, 0.05);
+  }
+
+  .tile-link:hover .tile-img6 {
+    box-shadow:
+      5px 5px rgba(203, 215, 193, 0.4),
+      10px 10px rgba(203, 215, 193, 0.3),
+      15px 15px rgba(203, 215, 193, 0.2),
+      20px 20px rgba(203, 215, 193, 0.1),
+      25px 25px rgba(203, 215, 193, 0.05);
+  }
+
+  .tile-link:hover .tile-img7 {
+    box-shadow:
+      5px 5px rgba(91, 209, 250, 0.4),
+      10px 10px rgba(91, 209, 250, 0.3),
+      15px 15px rgba(91, 209, 250, 0.2),
+      20px 20px rgba(91, 209, 250, 0.1),
+      25px 25px rgba(91, 209, 250, 0.05);
+  }
+
+  .tile-link:hover .tile-img8 {
+    box-shadow:
+      5px 5px rgba(145, 156, 196, 0.4),
+      10px 10px rgba(145, 156, 196, 0.3),
+      15px 15px rgba(145, 156, 196, 0.2),
+      20px 20px rgba(145, 156, 196, 0.1),
+      25px 25px rgba(145, 156, 196, 0.05);
+  }
+
+  .tile-link:hover .tile-img9 {
+    box-shadow:
+      5px 5px rgba(188, 97, 129, 0.4),
+      10px 10px rgba(188, 97, 129, 0.3),
+      15px 15px rgba(188, 97, 129, 0.2),
+      20px 20px rgba(188, 97, 129, 0.1),
+      25px 25px rgba(188, 97, 129, 0.05);
+  }
+
+  .tile-link:hover .tile-img10 {
+    box-shadow:
+      5px 5px rgba(4, 140, 231, 0.4),
+      10px 10px rgba(4, 140, 231, 0.3),
+      15px 15px rgba(4, 140, 231, 0.2),
+      20px 20px rgba(4, 140, 231, 0.1),
+      25px 25px rgba(4, 140, 231, 0.05);
   }
 </style>

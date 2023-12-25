@@ -18,140 +18,148 @@ posts.sort((a, b) => {
 });
 ---
 
-<BaseLayout title="Siddharth Suresh | Home" description="Siddharth Suresh's Personal Website">
+<BaseLayout
+  title="Siddharth Suresh | Home"
+  description="Siddharth Suresh's Personal Website"
+>
+  <script src="../lib/threejs/animation.ts"></script>
 
-<script src="../lib/threejs/animation.ts"></script>
+  <div id="world"></div>
+  <div class="" id="homeWorld">
+    <div class="relative min-h-screen overflow-auto">
+      <h1
+        id="name"
+        class="absolute left-1/2 top-[40%] flex w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center text-center text-3xl font-bold text-white xl:text-8xl"
+        style="display: none;"
+      >
+        Siddharth Suresh
+      </h1>
 
-<div id="world"></div>
-<div class="" id="homeWorld">
-  <div class="min-h-screen overflow-auto relative">
-    <h1
-      id="name"
-      class="absolute top-[40%] flex items-center justify-center w-full text-center left-1/2 xl:text-8xl text-3xl text-white font-bold -translate-x-1/2 -translate-y-1/2"
-      style="display: none;"
-    >
-      Siddharth Suresh
-    </h1>
+      <p
+        id="description"
+        class="absolute bottom-[50%] left-1/2 flex w-full -translate-x-1/2 translate-y-1/2 flex-col text-center text-lg font-bold text-white xl:text-2xl"
+      >
+        Full Stack Developer & Open Source Enthusiast
+      </p>
 
-    <p
-      id="description"
-      class="absolute flex w-full flex-col bottom-[50%] left-1/2 xl:text-2xl text-lg text-center text-white font-bold -translate-x-1/2 translate-y-1/2"
-    >
-      Full Stack Developer & Open Source Enthusiast
-    </p>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="absolute bottom-[15%] left-[50%] flex h-10 w-10 -translate-x-1/2 translate-y-1/2 animate-bounce flex-col"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <g transform="rotate(90 10 10)">
+          <path
+            fill-rule="evenodd"
+            d="M10 3a1 1 0 00-.707 1.707l3.182 3.182H3a1 1 0 100 2h9.475l-3.182 3.182a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5A1 1 0 0010 3z"
+            clip-rule="evenodd"></path>
+        </g>
+      </svg>
+    </div>
 
-    <a
-      id="description"
-      href="/projects"
-      class="absolute flex w-full flex-col bottom-[18%] left-1/2 xl:text-2xl text-lg text-center text-white font-bold -translate-x-1/2 translate-y-1/2"
-    >
-      View My Projects -&gt;
-    </a>
-  </div>
-
-  <div class="min-h-screen bg-[#0e2954c2] xl:p-16 p-3 -m-8" id="vprojects">
-    <p
-      id="viewProjects"
-      class="xl:text-4xl lg:text-2xl md:text-lg text-md text-white font-bold text-start p-10"
-    >
-      About Me
-    </p>
-    <div
-      class="flex xl:flex-row flex-col items-center justify-around gap-10 xl:text-xl text-lg p-8"
-    >
-      <div class="xl:w-[60%]">
-        <Paragraph class="mt-6 xl:text-justify leading-8">
-          Hey there! I'm Siddharth Suresh. I am full stack developer and a
-          student at Vellore Institute of Technology, Chennai pursuing B.Tech in
-          Computer Science with a Specialization in Cyber Physical Systems.
-        </Paragraph>
-        <Paragraph class="mt-6 xl:text-justify leading-8">
-          I'm excited to share my journey as a TypeScript Full Stack Developer
-          and my contributions to the open-source community, particularly my
-          work as a Core Team Member and Maintainer of
-          <Link href="https://www.blitzjs.com">⚡ Blitz.js</Link> .
-        </Paragraph>
-        <Paragraph class="mt-6 xl:text-justify leading-8">
-          As a developer, I have a strong foundation in Data Structures and
-          Algorithms which has helped me develop the skills necessary to solve
-          complex problems and build efficient systems. I am constantly looking
-          for new challenges and am always eager to learn new technologies,
-          which makes me passionate about languages and frameworks such as Rust
-          and Phoenix (Elixir).
-        </Paragraph>
-        <Paragraph class="mt-6 xl:text-justify leading-8" id="aboutMe">
-          I'll be sharing my experiences, insights, and learnings as a emerging
-          TypeScript Full Stack Developer, as well as my journey as a
-          contributor to the open-source community in the form of blog posts.
-        </Paragraph>
-      </div>
-      <div class="xl:w-1/3 flex flex-col gap-10 items-center justify-center">
-        <Paragraph
-          class="xl:text-2xl lg:text-xl md:text-lg text-md font-bold text-center"
-        >
-          My Tech Stack
-        </Paragraph>
-        <div class="grid grid-cols-3 gap-16">
-          <img src="/logos/nextjs.png" />
-          <img src="/logos/blitz.png" />
-          <img src="/logos/react.png" />
-          <img src="/logos/tanstack.png" />
-          <img src="/logos/tailwind.png" />
-          <img src="/logos/prisma.png" />
-          <img src="/logos/typescript.png" />
-          <img src="/logos/storybook.png" />
-          <img src="/logos/vscode.png" />
+    <div class="-m-8 min-h-screen bg-[#0e2954c2] p-3 xl:p-16" id="vprojects">
+      <p
+        id="viewProjects"
+        class="text-md p-10 text-start font-bold text-white md:text-lg lg:text-2xl xl:text-4xl"
+      >
+        About Me
+      </p>
+      <div
+        class="flex flex-col items-center justify-around gap-10 p-8 text-lg xl:flex-row xl:text-xl"
+      >
+        <div class="xl:w-[60%]">
+          <Paragraph class="mt-6 leading-8 xl:text-justify">
+            Hey there! I'm Siddharth Suresh. I am full stack developer and a
+            student at Vellore Institute of Technology, Chennai pursuing B.Tech
+            in Computer Science with a Specialization in Cyber Physical Systems.
+          </Paragraph>
+          <Paragraph class="mt-6 leading-8 xl:text-justify">
+            I'm excited to share my journey as a TypeScript Full Stack Developer
+            and my contributions to the open-source community, particularly my
+            work as a Core Team Member and Maintainer of
+            <Link href="https://www.blitzjs.com">⚡ Blitz.js</Link> .
+          </Paragraph>
+          <Paragraph class="mt-6 leading-8 xl:text-justify">
+            As a developer, I have a strong foundation in Data Structures and
+            Algorithms which has helped me develop the skills necessary to solve
+            complex problems and build efficient systems. I am constantly
+            looking for new challenges and am always eager to learn new
+            technologies, which makes me passionate about languages and
+            frameworks such as Rust and Phoenix (Elixir).
+          </Paragraph>
+          <Paragraph class="mt-6 leading-8 xl:text-justify" id="aboutMe">
+            I'll be sharing my experiences, insights, and learnings as a
+            emerging TypeScript Full Stack Developer, as well as my journey as a
+            contributor to the open-source community in the form of blog posts.
+          </Paragraph>
+        </div>
+        <div class="flex flex-col items-center justify-center gap-10 xl:w-1/3">
+          <Paragraph
+            class="text-md text-center font-bold md:text-lg lg:text-xl xl:text-2xl"
+          >
+            My Tech Stack
+          </Paragraph>
+          <div class="grid grid-cols-3 gap-16">
+            <img src="/logos/nextjs.png" />
+            <img src="/logos/blitz.png" />
+            <img src="/logos/react.png" />
+            <img src="/logos/tanstack.png" />
+            <img src="/logos/tailwind.png" />
+            <img src="/logos/prisma.png" />
+            <img src="/logos/typescript.png" />
+            <img src="/logos/storybook.png" />
+            <img src="/logos/vscode.png" />
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div id="tooltip"></div>
+  <div id="tooltip"></div>
 
-<style>
-  h1,
-  a,
-  p {
-    font-family: "Press Start 2P", cursive;
-    color: #fff;
-  }
+  <style>
+    h1,
+    a,
+    p {
+      font-family: "Press Start 2P", cursive;
+      color: #fff;
+    }
 
-  #world {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    /* background: #092635; */
-    /* background: linear-gradient(#e9a178, #102c57 20rem, #0e2954); */
-    /* make it a conic gradien */
-    background: linear-gradient(#e9a178, #102c57 50%, #0e2954);
-    z-index: -1;
-    /* make world stay as is while scrolling */
-    transform: translateZ(0);
-  }
+    #world {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      /* background: #092635; */
+      /* background: linear-gradient(#e9a178, #102c57 20rem, #0e2954); */
+      /* make it a conic gradien */
+      background: linear-gradient(#e9a178, #102c57 50%, #0e2954);
+      z-index: -1;
+      /* make world stay as is while scrolling */
+      transform: translateZ(0);
+    }
 
-  #tooltip {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0.5rem;
-    background: #104b68da;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem rgb(0, 0, 0);
-    font-size: 0.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: white;
-  }
-</style>
+    #tooltip {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0.5rem;
+      background: #104b68da;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 0.5rem rgb(0, 0, 0);
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: white;
+    }
+  </style>
 
-  <h1 slot="header-content" class="text-white font-mono text-xl">
-    <Link href="/">
-      siddharth.codes
-    </Link>
+  <h1 slot="header-content" class="font-mono text-white flex gap-4">
+    <Link href="/projects">projects</Link>
+    <Link href="/posts">posts</Link>
+    <Link href="/contactme">contact me</Link>
   </h1>
   <style>
     ul:hover li:not(:hover) :where(h2, time) {
