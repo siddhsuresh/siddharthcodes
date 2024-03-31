@@ -34,12 +34,14 @@ export default defineConfig({
       exclude: [
         "src/lib/3d-pin/3d-pin.tsx",
         "src/lib/bento-grid/bento-grid.tsx",
+        "src/lib/background-gradient/background-gradient.tsx"
       ],
     }),
     react({
       include: [
         "src/lib/3d-pin/3d-pin.tsx",
         "src/lib/bento-grid/bento-grid.tsx",
+        "src/lib/background-gradient/background-gradient.tsx"
       ],
     }),
   ],

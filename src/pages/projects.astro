@@ -7,6 +7,10 @@ import realTimeIrrigationPreview from "src/images/irrigation-system.png";
 import temperatureControlPreview from "src/images/temperature-control.png";
 import mriPreview from "src/images/mri.png";
 import libraryPreview from "src/images/library.png";
+import oxticketPreview from "src/images/oxticket.png";
+import sanjanacreatesPreview from "src/images/sanjanacreates.png";
+import siddharthCodes from "src/images/siddharthcodes.png";
+import { BackgroundGradient } from "src/lib/background-gradient/background-gradient";
 
 const projects = [
   {
@@ -62,8 +66,79 @@ const projects = [
   <div class="flex flex-col gap-10 p-4">
     <h1 class="text-center font-bold md:text-2xl xl:text-4xl">Projects</h1>
   </div>
+  <div class="flex items-center justify-center w-full">
+    <div
+      class="m-10 grid grid-cols-1 items-center justify-center gap-24 p-10 md:grid-cols-2 lg:grid-cols-4"
+    >
+      <div class="w-max">
+        <BackgroundGradient
+          className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-white dark:bg-gray-900"
+        >
+          <img
+            src={sanjanacreatesPreview.src}
+            alt="jordans"
+            height={sanjanacreatesPreview.height}
+            width={sanjanacreatesPreview.width}
+            class="h-48 w-full object-contain"
+          />
+          <p
+            class="mb-2 mt-4 text-base font-semibold text-black dark:text-gray-200 sm:text-xl"
+          >
+            sanjanacreates.art
+          </p>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-10 m-10 gap-20">
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Art Portfolio Website for Sanjana Suresh
+          </p>
+        </BackgroundGradient>
+      </div>
+      <div class="w-max">
+        <BackgroundGradient
+          className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-white dark:bg-gray-900"
+        >
+          <img
+            src={oxticketPreview.src}
+            alt="jordans"
+            height={oxticketPreview.height}
+            width={oxticketPreview.width}
+            class="h-48 w-full object-contain"
+          />
+          <p
+            class="mb-2 mt-4 text-base font-semibold text-black dark:text-gray-200 sm:text-xl"
+          >
+            0xticket
+          </p>
+
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            1st place in h.acKnight 48-hour offline hackathon April 2022
+          </p>
+        </BackgroundGradient>
+      </div>
+      <div class="w-max">
+        <BackgroundGradient
+          className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-white dark:bg-gray-900"
+        >
+          <img
+            src={siddharthCodes.src}
+            alt="jordans"
+            height={siddharthCodes.height}
+            width={siddharthCodes.width}
+            class="h-48 w-full object-contain"
+          />
+          <p
+            class="mb-2 mt-4 text-base font-semibold text-black dark:text-gray-200 sm:text-xl"
+          >
+            siddharth.codes
+          </p>
+
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Technical Portfolio Website for Siddharth Suresh
+          </p>
+        </BackgroundGradient>
+      </div>
+    </div>
+  </div>
+  <div class="m-10 grid grid-cols-1 gap-20 p-10 md:grid-cols-2 lg:grid-cols-4">
     {
       projects.map((project) => (
         <PinContainer
@@ -83,11 +158,11 @@ const projects = [
       ))
     }
   </div>
-
-  <style>
-    h1,
-    h2 {
-      font-family: "Press Start 2P", cursive;
-    }
-  </style>
 </BaseLayout>
+
+<style>
+  h1,
+  h2 {
+    font-family: "Press Start 2P", cursive;
+  }
+</style>
