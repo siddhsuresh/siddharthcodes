@@ -34,7 +34,7 @@ export const readingTimePlugin: RemarkPlugin = () => {
  * Same as remark-reading-time/mdx, but reads from `frontmatter`.
  */
 export const remarkMdxReadingTimePlugin: RemarkPlugin<[]> = () => {
-  return function transformer(tree, file) {
+  return function transformer(tree:any, file) {
     const data = file.data as { astro: PostProps };
 
     const readingTime = data.astro.frontmatter.readingTime;

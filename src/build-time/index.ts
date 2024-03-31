@@ -22,7 +22,7 @@ export const remarkPlugins = (projectDir: string): PluggableList => {
     [derivedTitleAndDatePlugin, { title: titleCase }],
     remarkSupersub,
     [
-      shikiTwoslash,
+      (shikiTwoslash as any).default,
       {
         themes: ["github-light", "github-dark"],
         defaultCompilerOptions: {
@@ -34,7 +34,7 @@ export const remarkPlugins = (projectDir: string): PluggableList => {
         },
       },
     ],
-    readingTimePlugin,
+    readingTimePlugin as any,
     remarkMdxReadingTimePlugin,
   );
 };

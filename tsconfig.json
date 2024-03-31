@@ -4,8 +4,8 @@
     "lib": [
       "DOM"
     ],
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
     "skipLibCheck": true,
     "baseUrl": "/Users/siddharthsuresh/Documents/Github/siddharthcodes"
   },
