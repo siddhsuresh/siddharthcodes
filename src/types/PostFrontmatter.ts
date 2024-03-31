@@ -47,4 +47,5 @@ export interface PostFrontmatter {
    */
   readingTime: ReadTimeResults;
   draft?: boolean;
+  featured?: boolean;
 }

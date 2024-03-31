@@ -1,121 +1,93 @@
 ---
 import BaseLayout from "src/layouts/BaseLayout.astro";
+import { PinContainer } from "src/lib/3d-pin/3d-pin.tsx";
+import fallDetectionPreview from "src/images/fall-detection.png";
+import imageSteganoPreview from "src/images/image-steg.png";
+import realTimeIrrigationPreview from "src/images/irrigation-system.png";
+import temperatureControlPreview from "src/images/temperature-control.png";
+import mriPreview from "src/images/mri.png";
+import libraryPreview from "src/images/library.png";
 
-import projects from "../images/projects.svg?raw";
+const projects = [
+  {
+    title: "Image Steganography",
+    description:
+      "This project for the course Cryptography and Network Security, created an end to end secure file transfer application secured by RSA, AES algorithms and steganography using the DCT method.",
+    link: "https://github.com/siddhsuresh/Steganography-Encrpytion-App/",
+    preview: imageSteganoPreview,
+  },
+  {
+    title: "Real Time Fall Detection System",
+    description:
+      "Real Time Low latency Websocket through Phoenix Channels (powered by Elixir and Erlang). Random Forest Classification based ML model to detect fall based on acceleration and gyroscope readings.",
+    link: "https://fall-detection-system.vercel.app/",
+    preview: fallDetectionPreview,
+  },
+  {
+    title: "Distributed Real Time Irrigation System",
+    description:
+      "This project for the course Distributed Real Time Systems Course, simulates an edge irrigation system that consists of a water pump connected to an ESP32.",
+    link: "https://drtsprojectsiddharth.vercel.app/",
+    preview: realTimeIrrigationPreview,
+  },
+  {
+    title: "Automatic Temperature Controlled Fan with AI Voice Recognition",
+    description:
+      "This project for the course Microprocessor and Interfacing Course, simulates control of a motor using an ESP8266 microcontroller programmed using the Arduino programming environment.",
+    link: "https://tempvoicefan.onrender.com/",
+    preview: temperatureControlPreview,
+  },
+
+  {
+    title: "MRI Classifier System",
+    description:
+      "A machine learning model to classify brain tumors using MRI scans. The model was trained on an extensive dataset using Convolutional Neural Network and deployed using Streamlit and achieved an accuracy of 92.5% on the test set.",
+    link: "https://cse3505-mri-classifier.streamlit.app/",
+    preview: mriPreview,
+  },
+  {
+    title: "Library Database Management",
+    description:
+      "For the course, Database Management Course, implemented a full stack library management system with robust two levels of authorization, and admin management.",
+    link: "https://github.com/siddhsuresh/blueblack-Library-Database-Management",
+    preview: libraryPreview,
+  },
+] as const;
 ---
 
-<BaseLayout title="Projects" description="A list of projects I've worked on.">
-  <div class="absolute inset-0 overflow-hidden -z-10">
-    <div class="jumbo absolute -inset-[10px] opacity-20"></div>
+<BaseLayout
+  title="Siddharth Suresh | Projects"
+  description="A list of projects I've worked on."
+>
+  <div class="flex flex-col gap-10 p-4">
+    <h1 class="text-center font-bold md:text-2xl xl:text-4xl">Projects</h1>
   </div>
-  <Fragment set:html={projects} />
 
-  <script is:inline>
-    window.addEventListener("load", () => {
-      let svg = document.querySelector("svg");
-      svg.setAttribute("preserveAspectRatio", "none");
-      let rects = document.querySelectorAll("rect");
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-10 m-10 gap-20">
+    {
+      projects.map((project) => (
+        <PinContainer
+          preview={project.preview as any}
+          href={project.link}
+          client:load
+        >
+          <div class="text-slate-100/50 flex h-[20rem] w-[20rem] basis-full flex-col p-4 tracking-tight sm:basis-1/2">
+            <h3 class="text-slate-100 !m-0 max-w-xs !pb-2 text-base font-bold">
+              {project.title}
+            </h3>
+            <div class="!m-0 !p-0 text-base font-normal">
+              <span class="text-slate-500">{project.description}</span>
+            </div>
+          </div>
+        </PinContainer>
+      ))
+    }
+  </div>
 
-      rects.forEach((rect) => {
-        console.log(rect);
-        rect.addEventListener("click", (e) => {
-          if (e.target.getAttribute("fill").includes("#pattern8")) {
-            window.location.href = "/open-source/How-stumbling-upon-Blitzjs-threw-me-in-the-world-of-open-source-development";
-          } else if (e.target.getAttribute("fill").includes("#pattern10")) {
-            window.location.href = "/projects/image-steganography";
-          } else if (e.target.getAttribute("fill").includes("#pattern4")) {
-            window.location.href = "https://0xticket.vercel.app";
-          }
-        });
-        rect.addEventListener("mouseenter", (e) => {
-          e.target.style.cursor = "pointer";
-          if (e.target.getAttribute("fill").includes("url")) {
-            e.target.style.transform = "scale(1.02)";
-            svg.append(rect);
-          }
-        });
-        rect.addEventListener("mouseleave", (e) => {
-          e.target.style.cursor = "default";
-          e.target.style.transform = "scale(1)";
-        });
-      });
-    });
-  </script>
+  <style>
+    h1,
+    h2 {
+      font-family: "Press Start 2P", cursive;
+    }
+  </style>
 </BaseLayout>
-
-<style>
-  h1,
-  a,
-  p {
-    font-family: "Press Start 2P", cursive;
-  }
-  @keyframes jumbo {
-    from {
-      background-position:
-        50% 50%,
-        50% 50%;
-    }
-    to {
-      background-position:
-        350% 50%,
-        350% 50%;
-    }
-  }
-
-  .jumbo {
-    --stripes: repeating-linear-gradient(
-      100deg,
-      #fff 0%,
-      #fff 7%,
-      transparent 10%,
-      transparent 12%,
-      #fff 16%
-    );
-    --stripesDark: repeating-linear-gradient(
-      100deg,
-      #000 0%,
-      #000 7%,
-      transparent 10%,
-      transparent 12%,
-      #000 16%
-    );
-    --rainbow: repeating-linear-gradient(
-      100deg,
-      #60a5fa 10%,
-      #e879f9 15%,
-      #60a5fa 20%,
-      #5eead4 25%,
-      #60a5fa 30%
-    );
-    background-image: var(--stripes), var(--rainbow);
-    background-size: 300%, 200%;
-    background-position:
-      50% 50%,
-      50% 50%;
-
-    filter: blur(10px) invert(100%);
-
-    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
-
-    pointer-events: none;
-  }
-
-  .jumbo::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--stripes), var(--rainbow);
-    background-size: 200%, 100%;
-    animation: jumbo 60s linear infinite;
-    background-attachment: fixed;
-    mix-blend-mode: difference;
-  }
-
-  .dark .jumbo {
-    background-image: var(--stripesDark), var(--rainbow);
-    filter: blur(10px) opacity(50%) saturate(200%);
-  }
-  .dark .jumbo::after {
-    background-image: var(--stripesDark), var(--rainbow);
-  }
-</style>

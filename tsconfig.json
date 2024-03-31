@@ -1,11 +1,17 @@
 {
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
-    "lib": ["DOM"],
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
+    "lib": [
+      "DOM"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "skipLibCheck": true,
-    "baseUrl": "."
+    "baseUrl": "/Users/siddharthsuresh/Documents/Github/siddharthcodes"
   },
-  "include": ["src", "api", "*.ts"]
+  "include": [
+    "src",
+    "api",
+    "*.ts"
+  ]
 }

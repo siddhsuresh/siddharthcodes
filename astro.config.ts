@@ -4,56 +4,48 @@ import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-
 import { rehypePlugins, remarkPlugins } from "./src/build-time";
-
+import react from "@astrojs/react";
 const __filename = fileURLToPath(import.meta.url);
-
 const __dirname = dirname(__filename);
 
 // Production URL
 const hostname = "siddharthcodes.vercel.app";
 const site = `https://${hostname}/`;
 
+
 // https://astro.build/config
 export default defineConfig({
   site,
   markdown: {
     // We'll highlight using Shiki Twoslash remark plugin
-    syntaxHighlight: false,
+    syntaxHighlight: false
   },
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    mdx({
-      extendMarkdownConfig: true,
-      // MDX integration inherits all remark plugins from markdown.remarkPlugins
-      remarkPlugins: remarkPlugins(__dirname),
-      rehypePlugins: rehypePlugins,
-    }),
-    solidJs(),
-  ],
+  integrations: [tailwind({
+    applyBaseStyles: false
+  }), mdx({
+    extendMarkdownConfig: true,
+    // MDX integration inherits all remark plugins from markdown.remarkPlugins
+    remarkPlugins: remarkPlugins(__dirname),
+    rehypePlugins: rehypePlugins
+  }), solidJs({
+    exclude: ["src/lib/3d-pin/3d-pin.tsx", "src/lib/bento-grid/bento-grid.tsx"]
+  }), react()],
   vite: {
     ssr: {
-      noExternal: [
-        "@fontsource-variable/inter",
-        "@fontsource-variable/brygada-1918",
-      ],
+      noExternal: ["@fontsource-variable/inter", "@fontsource-variable/brygada-1918"]
     },
     define: {
-      "import.meta.env.PUBLIC_URL": JSON.stringify(makePublicURL()),
-    },
-  },
+      "import.meta.env.PUBLIC_URL": JSON.stringify(makePublicURL())
+    }
+  }
 });
-
 function makePublicURL() {
   const VERCEL_URL = process.env.VERCEL_URL;
   const DEPLOYMENT_ALIAS = process.env.DEPLOYMENT_ALIAS;
 
   // If the site is built on vercel, we can just use VERCEL_URL.
   if (VERCEL_URL) return VERCEL_URL;
-
   if (!DEPLOYMENT_ALIAS) {
     // If there's no DEPLOYMENT_ALIAS nor VERCEL_URL, we assume we're building locally.
     return "http://localhost:3000/";
