@@ -28,7 +28,7 @@ const imgSrc =
 
 <main class="zaduma-prose py-4 max-w-container mx-auto ">
 <BaseLayout title={frontmatter.title} ogImage={ogImage} description={description} viewTransition={true}>
-  <Link href="/projects" slot="header-content">← projects</Link>
+  <Link href="/posts" slot="header-content">← posts</Link>
     <header
       class="pt-4 flex justify-between items-start sm:items-center flex-col sm:flex-row"
     >
@@ -52,7 +52,7 @@ const imgSrc =
     </h1>
     {
       imgSrc && (
-        <Image alt="" src={imgSrc} format="webp" width={774} aspectRatio={2} />
+        <img alt="" src={imgSrc} width={774}/>
       )
     }
     <slot />
