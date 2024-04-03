@@ -6,6 +6,7 @@ import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { rehypePlugins, remarkPlugins } from "./src/build-time";
 import react from "@astrojs/react";
+import vercel from '@astrojs/vercel/serverless';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -15,6 +16,10 @@ const site = `https://${hostname}/`;
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',
+  adapter: vercel({
+    webAnalytics: { enabled: true }
+  }),
   site,
   markdown: {
     // We'll highlight using Shiki Twoslash remark plugin
