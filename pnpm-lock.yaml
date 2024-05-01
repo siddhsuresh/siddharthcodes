@@ -38,8 +38,8 @@ dependencies:
     specifier: 2.2.1
     version: 2.2.1(patch_hash=xpblqcf4nverltfcba52wyvqbi)
   '@rollup/rollup-linux-x64-gnu':
-    specifier: ^4.13.2
-    version: 4.13.2
+    specifier: ^4.17.2
+    version: 4.17.2
   '@tabler/icons-react':
     specifier: ^3.1.0
     version: 3.1.0(react@18.2.0)
@@ -1578,6 +1578,13 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
+    dev: false
+    optional: true
+
+  /@rollup/rollup-linux-x64-gnu@4.17.2:
+    resolution: {integrity: sha512-Hy7pLwByUOuyaFC6mAr7m+oMC+V7qyifzs/nW2OJfC8H4hbCzOX07Ov0VFk/zP3kBsELWNFi7rJtgbKYsav9QQ==}
+    cpu: [x64]
+    os: [linux]
     dev: false
 
   /@rollup/rollup-linux-x64-musl@4.13.2:
