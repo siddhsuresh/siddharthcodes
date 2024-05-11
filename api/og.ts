@@ -1,5 +1,4 @@
 import { ImageResponse } from "@vercel/og";
-import type * as React from "react";
 
 export const config = { runtime: "edge" };
 
