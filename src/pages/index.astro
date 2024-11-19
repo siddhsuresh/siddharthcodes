@@ -10,6 +10,8 @@ if (import.meta.env.PROD) {
   posts = posts.filter((post) => !post.frontmatter.draft);
 }
 
+console.log(posts);
+
 posts.sort((a, b) => {
   return (
     new Date(b.frontmatter.date).getTime() -
