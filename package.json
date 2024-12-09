@@ -31,7 +31,7 @@
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
     "@vercel/og": "^0.5.13",
-    "astro": "^4.5.12",
+    "astro": "^4.11.3",
     "astro-eslint-parser": "^0.15.0",
     "clsx": "^2.1.0",
     "eslint-plugin-markdown": "^3.0.1",
